@@ -1,0 +1,8 @@
+<shipments>
+  <shipment product="coffee" type="FOOD" amount="1000" individualprice="5" shipmentPrice="500" country="Brazil" />
+  <shipment product="cellphone" type="ELETRONICS" amount="70" individualprice="800" shipmentPrice="1500" country="China" />
+  <shipment product="board game" type="TOY" amount="3000" individualprice="100" shipmentPrice="2000" country="China" />
+  <shipment product="wine" type="FOOD" amount="500" individualprice="500" shipmentPrice="2000" country="Italy" />
+  <shipment product="orange juice" type="FOOD" amount="10000" individualprice="3" shipmentPrice="700" country="Brazil" />
+  <shipment product="tshirts" type="CLOTHES" amount="5000" individualprice="30" shipmentPrice="700" country="Italy" />
+</shipments>
