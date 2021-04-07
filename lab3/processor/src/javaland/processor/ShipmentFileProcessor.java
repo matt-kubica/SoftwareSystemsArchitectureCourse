@@ -40,14 +40,13 @@ public class ShipmentFileProcessor {
         if (filename.endsWith(".xml")) {
             optional = this.readers.stream().filter(shipmentReader -> shipmentReader.getFileType().equals("xml")).findFirst();
             if (optional.isPresent()) reader = optional.get();
-            else throw new Exception("Reader not found!");
+            else throw new Exception("XMLReader instance not found!");
         } else if (filename.endsWith(".csv")) {
             optional = this.readers.stream().filter(shipmentReader -> shipmentReader.getFileType().equals("csv")).findFirst();
             if (optional.isPresent()) reader = optional.get();
-            else throw new Exception("Reader not found!");
-        }
+            else throw new Exception("CSVReader not found!");
+        } else throw new Exception("Cannot find suitable reader!");
 
-        assert reader != null;
         return reader.readFile(filename);
     }
 
@@ -60,6 +59,7 @@ public class ShipmentFileProcessor {
                     taxesCalculator.getCountry().toLowerCase().equals(sh.country.toLowerCase())).findFirst();
             if (optional.isPresent())
                 sum += optional.get().calculateTax(sh);
+            else System.err.println("Cannot find TaxesCalculator for " + sh.country);
         }
         return sum;
     }
@@ -68,12 +68,13 @@ public class ShipmentFileProcessor {
 
     public static void main(String[] args) {
         ShipmentFileProcessor processor = new ShipmentFileProcessor(FILENAME);
-        processor.calculators.forEach(taxesCalculator -> System.out.println(taxesCalculator.getCountry()));
-        processor.readers.forEach(shipmentReader -> System.out.println(shipmentReader.getFileType()));
-//        try {
-//            System.out.println(processor.calculate());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+//        processor.calculators.forEach(taxesCalculator -> System.out.println(taxesCalculator.getCountry()));
+//        processor.readers.forEach(shipmentReader -> System.out.println(shipmentReader.getFileType()));
+
+        try {
+            System.out.println(processor.calculate());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
