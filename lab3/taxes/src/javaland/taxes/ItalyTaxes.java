@@ -11,8 +11,8 @@ public class ItalyTaxes implements TaxesCalculator {
 
         if(shipment.individualPrice > 500) fixedCost = 5;
 
-        double total = shipment.amount * shipment.individualPrice;
-        double tax = 0.3 * total + fixedCost;
+        double total = shipment.amount * (shipment.individualPrice + fixedCost);
+        double tax = 0.3 * total;
         if(shipment.productType.equals("CLOTHES") && total < 50000) {
             tax -= (tax * 0.2);
         }
