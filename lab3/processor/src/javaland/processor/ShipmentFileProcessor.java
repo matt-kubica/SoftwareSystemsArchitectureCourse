@@ -64,17 +64,17 @@ public class ShipmentFileProcessor {
         return sum;
     }
 
-    public static final String FILENAME = "inputs/shipments.csv";
+    public static final String[] FILENAMES = new String[] { "inputs/shipments.csv", "inputs/shipments.xml" };
 
     public static void main(String[] args) {
-        ShipmentFileProcessor processor = new ShipmentFileProcessor(FILENAME);
-//        processor.calculators.forEach(taxesCalculator -> System.out.println(taxesCalculator.getCountry()));
-//        processor.readers.forEach(shipmentReader -> System.out.println(shipmentReader.getFileType()));
-
         try {
-            System.out.println(processor.calculate());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            for(String filename : FILENAMES) {
+                ShipmentFileProcessor processor = new ShipmentFileProcessor(filename);
+                System.out.println(String.format("Total tax for all shipments using %s file: %.2f", filename, processor.calculate()));
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+
+
+
     }
 }
