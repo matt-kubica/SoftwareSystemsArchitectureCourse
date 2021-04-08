@@ -6,4 +6,7 @@ import javaland.taxes.ItalyTaxes;
 module taxes {
     requires shipments;
     provides TaxesCalculator with ItalyTaxes, BrazilTaxes, ChinaTaxes;
+
+    // for test purposes
+    exports javaland.taxes to tests;
 }
