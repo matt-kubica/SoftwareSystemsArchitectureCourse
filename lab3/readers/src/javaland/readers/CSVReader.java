@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class CSVReader implements ShipmentReader {
 
     @Override
-    public List<Shipment> readFile(String path) {
+    public List<Shipment> readFile(String path) throws Exception {
         List <Shipment> result = new ArrayList<>();
         try {
             Scanner reader = new Scanner(new File(path));
@@ -30,7 +30,9 @@ public class CSVReader implements ShipmentReader {
             }
             reader.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            // this is really simplified, normally there some custom exceptions should be implemented
+            // or exceptions should be passed further
+            throw new Exception("Cannot read CSV file");
         }
         return result;
     }

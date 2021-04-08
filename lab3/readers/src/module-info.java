@@ -6,4 +6,7 @@ module readers {
     requires shipments;
     requires java.xml;
     provides ShipmentReader with CSVReader, XMLReader;
+
+    // for test purposes
+    exports javaland.readers to tests;
 }

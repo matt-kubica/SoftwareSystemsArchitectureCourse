@@ -21,7 +21,7 @@ import javax.xml.parsers.ParserConfigurationException;
 public class XMLReader implements ShipmentReader {
 
     @Override
-    public List<Shipment> readFile(String path) {
+    public List<Shipment> readFile(String path) throws Exception {
         List <Shipment> result = new ArrayList<>();
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
@@ -46,9 +46,10 @@ public class XMLReader implements ShipmentReader {
                     result.add(new Shipment(productName, productType, amount, individualPrice, shipmentPrice, country));
                 }
             }
-
         } catch (SAXException | IOException | ParserConfigurationException e) {
-            e.printStackTrace();
+            // this is really simplified, normally there some custom exceptions should be implemented
+            // or exceptions should be passed further
+            throw new Exception("Cannot read XML file");
         }
 
         return result;
