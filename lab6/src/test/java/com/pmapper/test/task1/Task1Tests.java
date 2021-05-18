@@ -6,15 +6,15 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import com.pmapper.ParamMapper;
-import com.pmapper.ParameterReadingException;
+import com.pmapper.exceptions.ParameterReadingException;
 
 
 public class Task1Tests {
 
 	@Test
-	public void allFalse(){
+	public void allFalse() throws ParameterReadingException {
 		ParamMapper mapper = new ParamMapper();
-		String[] args ={};
+		String[] args = {};
 		ParamClassTask1 param = mapper.map(args , ParamClassTask1.class);
 		
 		assertFalse(param.isaPresent());
@@ -22,9 +22,9 @@ public class Task1Tests {
 	}
 	
 	@Test
-	public void aPresent(){
+	public void aPresent() throws ParameterReadingException {
 		ParamMapper mapper = new ParamMapper();
-		String[] args ={"-A"};
+		String[] args = { "-A" };
 		ParamClassTask1 param = mapper.map(args , ParamClassTask1.class);
 		
 		assertTrue(param.isaPresent());
@@ -32,9 +32,9 @@ public class Task1Tests {
 	}
 	
 	@Test
-	public void bPresent(){
+	public void bPresent() throws ParameterReadingException {
 		ParamMapper mapper = new ParamMapper();
-		String[] args ={"-B"};
+		String[] args = { "-B" };
 		ParamClassTask1 param = mapper.map(args , ParamClassTask1.class);
 		
 		assertFalse(param.isaPresent());
@@ -42,9 +42,9 @@ public class Task1Tests {
 	}
 	
 	@Test
-	public void bothPresent(){
+	public void bothPresent() throws ParameterReadingException {
 		ParamMapper mapper = new ParamMapper();
-		String[] args ={"-A","-B"};
+		String[] args = { "-A", "-B" };
 		ParamClassTask1 param = mapper.map(args , ParamClassTask1.class);
 		
 		assertTrue(param.isaPresent());
@@ -52,9 +52,9 @@ public class Task1Tests {
 	}
 	
 	@Test
-	public void unmappedParamPresent(){
+	public void unmappedParamPresent() throws ParameterReadingException {
 		ParamMapper mapper = new ParamMapper();
-		String[] args ={"-A","-B","-C"};
+		String[] args = { "-A", "-B", "-C" };
 		ParamClassTask1 param = mapper.map(args , ParamClassTask1.class);
 		
 		assertTrue(param.isaPresent());
@@ -62,9 +62,9 @@ public class Task1Tests {
 	}
 
 	@Test(expected=ParameterReadingException.class)
-	public void nonBooleanParamMapped(){
+	public void nonBooleanParamMapped() throws ParameterReadingException {
 		ParamMapper mapper = new ParamMapper();
-		String[] args ={"-A"};
+		String[] args = { "-A" };
 		mapper.map(args , InvalidParamClassTask1.class);
 	}
 	
